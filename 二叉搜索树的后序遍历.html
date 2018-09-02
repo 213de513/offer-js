@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function VerifySquenceOfBST(seq){
+			//BST的后序序列的合法序列是，对于一个序列S，最后一个元素是x （也就是根），
+			//如果去掉最后一个元素的序列为T，那么T满足：T可以分成两段，前一段（左子树）小于x，
+			//后一段（右子树）大于x，且这两段（子树）都是合法的后序序列。
+			if(seq.length==0){
+				return false;
+			}
+			return judeg(seq,0,seq.length-1);
+
+		}
+		function judeg(arr,l,r){
+			if(l>=r) return true;
+			var i = r;
+			while(i>l&&arr[i-1]>arr[r]) i--; //找到第一个比根小的数，作为分界点i索引，所以只需要判断i坐标的值即可判断是否是搜索二叉树后序遍历
+			for(var j=i-1;j>=l;j--){
+				//判断左子树，如果有一个数大于根，就返回false
+				if(arr[j]>arr[r]){
+					return false;
+				}
+			}
+			//递归判断左右子树是否是搜索二叉树
+			return judeg(arr,l,i-1) && (judeg(arr,i,r-1));
+		}
+		console.log(VerifySquenceOfBST([1,2,3,4,5]));
+	</script>
+</body>
+</html>
