@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//实现队列的两个函数 appendTail deleteHead 
+		//思路：使用两个栈，首先放入队列中的时候，直接放到栈一中，当想要删除的时候，不能使用栈一，而是把栈一中的元素一次出栈，并放入栈二中，因此栈二就有了相反的元素，这时候在出栈，就可以模拟队列了。
+		var stack1 = [];
+		var stack2 = [];
+		function appendTail(n){
+			stack1.push(n);
+		}
+		function deleteHead(){
+			if(stack2.length==0){
+				while(stack1.length>0){
+					stack2.push(stack1.pop());
+				}
+			}
+				return stack2.pop();
+			
+		}
+		appendTail(1);
+		appendTail(2);
+		appendTail(3);
+		console.log(stack1)
+		console.log(deleteHead());
+		console.log(deleteHead());
+		console.log(deleteHead());
+		console.log(deleteHead());
+	</script>
+</body>
+</html>

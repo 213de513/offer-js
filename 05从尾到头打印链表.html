@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//思想： 1 利用栈后进先出的特点实现反向打印
+		//2 可以利用reverse的api打印
+
+		//模拟一个链表
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}		
+		var head = new ListNode('head');
+		var b1 = new ListNode('b1');
+		var b2 = new ListNode('b2');
+		var foot = new ListNode('foot');
+		head.next = b1;
+		b1.next = b2;
+		b2.next = foot;
+
+		function printFromTailToHead(node){
+			if(node==null){
+				 console.log(false);
+			}else{
+				var stack = [];
+				var current = node;
+				//把头压进栈中
+				stack.push(current.val);
+				//当当前节点的下一个节点不为空，就把下一个节点的值压进栈中
+				while(current.next!==null){
+					stack.push(current.next.val);
+					//切换当前节点
+					current = current.next;
+				}
+				//然后在反向打印即可
+				while(stack.length!=0){
+					console.log(stack.pop());
+				}
+			}
+			
+		}
+		printFromTailToHead(head);
+	</script>
+</body>
+</html>

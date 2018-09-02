@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var arr = [2,3,1,0,2,5,3];
+		function search(arr){
+			if(arr.length==0){
+				return false;
+			}
+			var obj = {};
+			var result = [];
+			arr.forEach(item=>{
+				//如果对象中有这个字段，证明之前出现过，就重复了
+				if(!obj[item]){
+					obj[item] = item;
+				}else{
+					//如果数组中没有这个数就加进去
+					if(result.indexOf(item)==-1){
+						result.push(item);
+					}
+				}
+			})
+			return result;
+		}
+		console.log(search(arr));
+	</script>
+</body>
+</html>

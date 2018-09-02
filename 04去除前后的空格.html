@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Trim(str){
+			//利用字符串的replace的api 使用正则全局替换
+			var res = str.replace(/(^\s*)|(\s*$)/g,'');
+			return res;
+		}
+		console.log(Trim(' hello world '))
+	</script>
+</body>
+</html>

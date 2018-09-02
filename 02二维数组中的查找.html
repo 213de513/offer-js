@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Find(matrix,target){
+			var result = false;
+			var rows = matrix.length; //二维数组的行
+			var cols = matrix[0].length;//二维数组的列
+			if(matrix.length!=0&&cols>0&&rows>0){
+				//每次找右上角的数
+				var row = 0;
+				var col = cols-1;
+				while (row<rows&&col>=0) {
+					//如果右上角相等就证明找到了
+					if(matrix[row][col]==target){
+						result = true;
+						break;
+					}else if(matrix[row][col]>target){
+						//如果右上角的数大于目标值，就删掉这一列
+						--col;
+					}else{
+						//如果右上角的数小于目标值，就删掉这一行，因为比目标值小证明目标值在右上角的右边或者下边，但是右边已经被删掉，所以只能在下边。
+						++row;
+					}
+				}
+
+			}
+			return result;
+		}
+		var m = [[1,2,8,9],[2,4,9,12],[4,7,10,13],[6,8,11,15]];
+		console.log(Find(m))
+	</script>
+</body>
+</html>

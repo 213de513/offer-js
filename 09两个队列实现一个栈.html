@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var queue1 = [];
+		var queue2 = [];
+		function appendTail(n){
+			queue1.push(n);
+		}
+		function deleteTail(){
+			if(queue1.length==0){
+				return false;
+			}
+			while(queue1.length!=1){
+				//如果队列1的长度不为1，证明里边还有其他元素，就要把其他元素依次放到queue2中
+				queue2.push(queue1.shift());
+			}
+			console.log(queue1[0]);
+			//弹出最后一个之后，还有把queue1剩下的元素归为，直接赋值就好
+			queue1 = queue2;
+			queue2 = [];
+		}
+
+		appendTail(1)
+		appendTail(2)
+		appendTail(3);
+		console.log(queue1);
+		deleteTail();
+		deleteTail();
+		deleteTail();
+		deleteTail();
+	</script>
+</body>
+</html>

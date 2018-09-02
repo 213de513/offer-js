@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		class Node{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var a = new Node('a')
+		var b = new Node('b')
+		var c = new Node('c')
+		var d = new Node('d')
+		var e = new Node('e')
+		var f = new Node('f')
+		var g = new Node('g')
+		var h = new Node('h')
+		var i = new Node('i')
+		a.left = b;
+		a.right=c;
+		b.left = d;
+		b.right = e;
+		e.left = h;
+		e.right = i;
+		c.left = f;
+		c.right = g;
+		//中序遍历
+		var res = [];
+		function inorder(node){
+
+			if(node==null){
+				return false;
+			}else{
+				inorder(node.left);
+				res.push(node.val);
+				inorder(node.right);
+			}
+		}
+		function searchNext(node,target){
+			inorder(node);
+			if(res.length<=0){
+				return false;
+			}
+			for(var i=0;i<res.length;i++){
+				if(res[i]==target){
+					console.log(res[i+1]); 
+				}
+			}
+		}
+		searchNext(a,'a');
+	</script>
+</body>
+</html>

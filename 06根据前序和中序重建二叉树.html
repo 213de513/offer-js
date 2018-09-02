@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	//思路： 前序遍历的第一个数 总是根节点的数，这个数在中序遍历的中间，中序遍历左边是左子树，右边是右子树，然后进行递归，传递进左子树的前序中序，右子树的前序中序即可。
+		class Node{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		function Construct(preorder,inorder){
+			if(preorder==null||inorder==null||preorder.length==0){
+				return;
+			}
+			var rootVal = preorder[0];//前序遍历第一个是根节点
+			var root = new Node(rootVal);//创建一棵树
+			for(var i=0;i<inorder.length;i++){ //遍历中序遍历数组，找到根节点的位置
+				if(inorder[i]==rootVal){
+					//递归操作左子树 （最好画个图看一看）
+					root.left = Construct(preorder.slice(1,i+1),inorder.slice(0,i));
+					//递归操作右子树
+					root.right = Construct(preorder.slice(i+1),inorder.slice(i+1));
+				}
+			}
+			return root
+		}
+		console.log(Construct([1,2,4,7,3,5,6,8],[4,7,2,1,5,3,8,6]))
+
+	</script>
+</body>
+</html>

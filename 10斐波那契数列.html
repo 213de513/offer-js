@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//递归斐波那契数列(可能会有栈溢出，效率不高，当n很大时会非常慢)；
+		// function fib(n){
+		// 	if(n<=2){
+		// 		return 1;
+		// 	}
+		// 	return fib(n-1)+fib(n-2);
+		// }
+		// console.log(fib(5));
+		//利用循环来做
+		function fib(n){
+			var pre = 1,current = 1;
+			for(var i=2;i<n;i++){
+				[pre,current] = [current,current+pre];
+			}
+			return current;
+		}
+		console.log(fib(6));
+	</script>
+</body>
+</html>
