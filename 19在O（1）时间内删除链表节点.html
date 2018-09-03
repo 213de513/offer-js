@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//生成链表
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}		
+		var head = new ListNode('head');
+		var b1 = new ListNode('b1');
+		var b2 = new ListNode('b2');
+		var foot = new ListNode('foot');
+		head.next = b1;
+		b1.next = b2;
+		b2.next = foot;
+		function deleteNode(head,target){
+			var current = head;
+			//如果是头节点
+			if(target.val==head.val){
+				// head = head.next;
+				head.val = head.next.val;
+				head.next = head.next.next;
+			}else{
+				//如果不是头节点
+					while(current.next!==null){
+					if(current.next.val==target.val){
+						//如果目标节点不是尾节点
+						if(current.next.next!==null){
+							var temp = current.next.next
+							delete current.next;
+							current.next = temp;
+						}else{
+						//如果是尾节点，直接把next设为空
+							current.next = null;
+							return;
+						}
+					}
+					current = current.next;
+				}
+			}
+			
+		}
+		console.log(head);
+		deleteNode(head,head);
+		console.log(head);
+	</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}		
+		var head = new ListNode(1);
+		var b1 = new ListNode(2);
+		var b2 = new ListNode(2);
+		var foot = new ListNode(3);
+		head.next = b1;
+		b1.next = b2;
+		b2.next = foot;
+
+		function DeleteDuplication(head){
+			if(head==null){
+				return false;
+			}
+			var current = head;
+			//设置一个对象，用于检测是否有重复的
+			var obj = {};
+			while(current!==null){
+				var val = current.val;
+				if(!obj[val]){
+					obj[val] = val;
+				}else{
+					//如果对象中有这个数了，证明重复了，就删除这个节点
+					deleteNode(head,current);
+				}
+				current = current.next;
+			}
+		}
+		//删除节点
+		function deleteNode(head,target){
+			var current = head;
+			//如果是头节点
+			if(target.val==head.val){
+				// head = head.next;
+				head.val = head.next.val;
+				head.next = head.next.next;
+			}else{
+				//如果不是头节点
+					while(current.next!==null){
+					if(current.next.val==target.val){
+						//如果目标节点不是尾节点
+						if(current.next.next!==null){
+							var temp = current.next.next
+							delete current.next;
+							current.next = temp;
+						}else{
+						//如果是尾节点，直接把next设为空
+							current.next = null;
+							return;
+						}
+					}
+					current = current.next;
+				}
+			}
+			
+		}
+		DeleteDuplication(head);
+		console.log(head);
+	</script>
+</body>
+</html>

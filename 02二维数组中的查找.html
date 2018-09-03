@@ -8,12 +8,13 @@
 	<script>
 		function Find(matrix,target){
 			var result = false;
-			var rows = matrix.length; //二维数组的行
-			var cols = matrix[0].length;//二维数组的列
+			var rows = matrix.length; //二维数组的行数
+			var cols = matrix[0].length;//二维数组的列数
 			if(matrix.length!=0&&cols>0&&rows>0){
 				//每次找右上角的数
 				var row = 0;
 				var col = cols-1;
+				//横坐标要小于4 纵坐标要大于等于0
 				while (row<rows&&col>=0) {
 					//如果右上角相等就证明找到了
 					if(matrix[row][col]==target){

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：请实现一个函数用来匹配包含‘.’和‘*’的正则表达式。模式中‘.’表示任意一个字符，‘*’表示他前面的字符可以出现任意次（含0次）
+		// 		如果模式匹配字符的下一个字符是‘*’:
+		// •如果pttern当前字符和str的当前字符匹配，：有以下三种可能情况
+		// （1）pttern当前字符能匹配 str 中的 0 个字符：match(str, pattern+2)
+		// （2）pttern当前字符能匹配 str 中的 1 个字符：match(str+1, pattern+2)
+		// （3）pttern当前字符能匹配 str 中的 多 个字符：match(str+1, pattern)
+		//  ·如果pttern当前字符和和str的当前字符不匹配
+		// pttern当前字符能匹配 str 中的 0 个字符：(str, pattern+2)
+		// 如果模式匹配字符的下一个字符不是‘*’，进行逐字符匹配。
+		// 对于 ‘.’ 的情况比较简单，’.’ 和一个字符匹配 match(str+1, pattern+1)
+		function Match(str,patten){
+			if(str==null||patten==null){
+				return false;
+			}
+			var strIndex = 0;
+			var pattenIndex = 0;
+			return MatchCore(str,strIndex,patten,pattenIndex)
+		}
+		function MatchCore(str,sIndex,patten,pIndex){
+			if(str.length==sIndex&&patten.length==pIndex){
+				//字符串先匹配完了
+				return true;
+			}else if(str.length!==sIndex && patten.length==pIndex){
+				//字符串没匹配完
+				return false
+			}
+			if(pIndex+1<patten.length&&patten[pIndex+1]=='*'){
+				if ((sIndex != str.length && patten[pIndex] == str[sIndex]) || (patten[pIndex] == '.' && sIndex != str.length)){
+					return MatchCore(str,sIndex,patten,pIndex+2)||MatchCore(str,sIndex+1,patten,pIndex+2)||MatchCore(str,sIndex+1,patten,pIndex);
+				}else{
+					MatchCore(str,sIndex,patten,pIndex+2)
+				}
+			}
+			if ((sIndex != str.length && patten[pIndex] == str[sIndex]) || (patten[pIndex] == '.' && sIndex != str.length)) {
+        		return MatchCore(str, sIndex + 1, patten, pIndex + 1);
+		    }
+		    return false;
+		}
+		console.log(Match('aaa','ab*ac*a'))
+	</script>
+</body>
+</html>

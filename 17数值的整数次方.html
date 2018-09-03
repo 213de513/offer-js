@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Pow(base,exp){
+			//底数为0就是0
+			if(base==0){
+				return 0
+			}
+			//指数为0就是1
+			if(exp==0){
+				return 1;
+			}
+			//处理指数为负数的情况
+			var absExp = exp;
+			if(exp<0){
+				absExp = -exp;
+			}
+			var result = 1;
+			for(var i=0;i<absExp;i++){
+				result *=base;
+			}
+			//一个数的负指数等于这个数的正指数的倒数
+			if(exp<0){
+				result = 1/result;
+			}
+			return result;
+		}
+		console.log(Pow(2,5));
+	</script>
+</body>
+</html>

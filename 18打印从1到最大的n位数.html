@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入数字n，按顺序打印出从1到最大n位十进制数。比如输入3，则打印1，2，3。。。。999
+		function PrintToMax(n){
+			var max = 1;
+			//先求出n位最大的数。
+			while(n--){
+				max*=10
+			}
+			for(var i=1;i<=max-1;i++){
+
+				console.log(i);
+			}
+			// console.log(max);
+		}
+		PrintToMax(2);
+	</script>
+</body>
+</html>

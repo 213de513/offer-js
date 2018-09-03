@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function Max2(n){
+			if(n<2){
+				return 0
+			}
+			if(n==2){
+				return 1
+			}
+			if(n==3){
+				return 2;
+			}
+			//尽可能多地去剪长度为3的绳子
+			var timesOf3 = Math.floor(n/3);
+			//当绳子最后剩下的长度为4时，不能再去剪长度为3的绳子段
+			//此时更好的方法是把绳子剪成长度为2的两段
+			if(n-timesOf3*3==1){
+				//证明剪出来的最后一段是4
+				timesOf3-=1;
+			}
+			var timesOf2 = (n-timesOf3*3)/2;
+			return (Math.pow(3,timesOf3)*Math.pow(2,timesOf2));
+		}
+		console.log(Max2(4))
+	</script>
+</body>
+</html>

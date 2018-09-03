@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	//题目：一根长度为n的绳子，请把绳子剪成m段（m,n都是正整数），求所有绳子的最大乘积是多少？
+	//思路：动态规划，把一个大问题分解为多个小问题，每个小问题都有最优解，我们可以用从下往上的顺序优先计算小问题并把最优解存储下来，再以此为基础求取大问题的最优解。
+		function Max1(n){
+			//当绳子小于2 不能切
+			if(n<2){
+				return 0;
+			}
+			//绳子长度为2 就是 1*1=1
+			if(n==2){
+				return 1;
+			}
+			//绳子长度为3 就是 1*2=2 > 1*1*1=1 
+			if(n==3){
+				return 2;
+			}
+			//设置一个存储数组，用于存储所有问题的最优解
+			var res = [];
+			var max = 0;
+			//预先设置值，i为0，1，2，3的时候都是不切最大
+			res[0] = 0;
+			res[1] = 1;
+			res[2] = 2;
+			res[3] = 3;
+			//从4开始 依次存储小问题，由于之前的已经设置了0，1，2，3所以j的取值已经算出来了，可以直接使用
+			for(var i=4;i<=n;++i){
+				//每个i都要重新设置一下max
+				max = 0;
+				//因为自下而上的求解，所以每次只需要切一刀，就可以知道当前最大值，也就是只有i/2种情况。
+				for(var j=1;j<=i/2;++j){
+					var product = res[j]*res[i-j];
+					if(max<product){
+						max = product;
+					}
+					res[i] = max;
+				}
+			}
+			max = res[n];
+			return max;
+		}
+
+		console.log(Max1(8));
+
+	</script>
+</body>
+</html>

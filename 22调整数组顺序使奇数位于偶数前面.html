@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	//题目：输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组前半部分，所有偶数位于数组的后半部分；
+		function changeOddEven(data){
+			if(data.length==0){
+				return false;
+			}
+			var left = [];
+			var right = [];
+			data.forEach(item=>{
+				if(item%2==0){
+					right.push(item)
+				}else{
+					left.push(item);
+				}
+			})
+			return left.concat(right);
+		}
+		var arr = [2,4,6,8,1];
+		console.log(changeOddEven(arr));
+	</script>
+</body>
+</html>

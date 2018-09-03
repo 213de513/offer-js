@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入一个证书，输出该数二进制中‘1’的个数。
+		//思路：一个数，如果不是0，则n & (n-1) 就会减少该二进制中的最右边一个1
+		//例如：4：100 3:011  4&3 = 000;
+		//7：111 6：110  7&6 = 110 5 是101 6&5 = 100 由此可以得到如下程序：
+		function NumberOf1(num){
+			var count = 0;
+			while(num!==0){
+				count++;
+				num = num & (num-1);
+			}
+			return count;
+		}
+		//负数的二进制是其整数的反码的补码；
+		console.log(NumberOf1(-1));
+	</script>
+</body>
+</html>

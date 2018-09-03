@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：把一个数组最开的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出最小元素。
+		//思路：1 直接遍历 ，时间复杂度是O(n)
+		//2.二分查找，时间复杂度是O(logn)
+		function Min(arr){
+			if(arr.length<=0){
+				return false;
+			}
+			var pre = 0;
+			var last = arr.length-1;
+			//只有间隔为1了，后边的指针指的才是最小的数
+			while(last-pre!=1){
+				//以下为二分查找过程，如果中间的数大于左指针，必定是左边的数组中的数，就把左边指针指向它
+				//如果中间的数小于右指针，说明，在右边数组中，就把右指针指向它。
+				var mid = Math.floor((pre+last)/2);
+				if(arr[mid]>arr[pre]){
+					pre = mid;
+				}else if(arr[mid]<[last]){
+					last = mid;
+				}
+			}
+			return arr[last];
+		}
+		var target = [3,4,5,1,2];
+		console.log(Min(target));
+	</script>
+</body>
+</html>
