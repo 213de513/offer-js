@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//完成一个函数，输入一颗二叉树，输出它的镜像二叉树
+		class Node{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Node(8);
+		var n2 = new Node(8);
+		var n3 = new Node(9);
+		var n4 = new Node(2);
+		var n5 = new Node(4);
+		var n6 = new Node(7);
+		var n7 = new Node(7);
+		n1.left = n2;
+		n1.right = n7;
+		n2.left = n3;
+		n2.right = n4;
+		n4.left = n5;
+		n4.right = n6;
+		function mirrorTree(pRoot){
+			if(pRoot==null){
+				return false;
+			}
+			//左右子树同时为空不用交换
+			if(pRoot.left==null&&pRoot.right==null){
+				return;
+			}
+			//交换左右子树
+			var temp = pRoot.left;
+			pRoot.left = pRoot.right;
+			pRoot.right = pRoot.left;
+			if(pRoot.left!==null){
+				mirrorTree(pRoot.left);
+			}
+			if(pRoot.right !==null){
+				mirrorTree(pRoot.right);
+			}
+		}
+		console.log(n1);
+		mirrorTree(n1);
+		console.log(n1);
+	</script>
+</body>
+</html>

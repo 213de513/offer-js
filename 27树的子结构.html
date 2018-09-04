@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入两个二叉树A和B，判断B是不是A的子结构。
+		class Node{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Node(8);
+		var n2 = new Node(8);
+		var n3 = new Node(9);
+		var n4 = new Node(2);
+		var n5 = new Node(4);
+		var n6 = new Node(7);
+		var n7 = new Node(7);
+		n1.left = n2;
+		n1.right = n7;
+		n2.left = n3;
+		n2.right = n4;
+		n4.left = n5;
+		n4.right = n6;
+		var m1 = new Node(8);
+		var m2 = new Node(9);
+		var m3 = new Node(2);
+		m1.left = m2;
+		m1.right =  m3;
+		//思路：1遍历二叉树，一般采用递归方式遍历二叉树，找到与目标相同的节点，然后判断这个节点是不是有这个结构，如果没有就继续遍历别的借点。
+		//2.判断节点是不是子结构，采用递归方式，只有其中有一环不一样，就返回false，如果root2遍历完了还没有返回false证明，是子结构。
+		//遍历二叉树
+		function HasSubtree(pRoot1,pRoot2){
+			var result = false;
+			if(pRoot1!==null&&pRoot2!==null){
+				//遍历过程中，如果根节点相同了，就判断剩下的有没有相同的节点。
+				if(pRoot1.val==pRoot2.val){
+					result = DoseTree1HaveTree2(pRoot1,pRoot2);
+				}
+				//遍历左节点
+				if(!result){
+					result = HasSubtree(pRoot1.left,pRoot2);
+				}
+				//遍历右节点
+				if(!result) {
+					result = HasSubtree(pRoot1.right,pRoot2);
+				} 
+			}
+			return result;
+		}
+		function DoseTree1HaveTree2(p1,p2){
+			//p2遍历完了，证明有
+			if(p2==null){
+				return true;
+			}
+			if(p1==null){
+				return false;
+			}
+			if(p1.val!==p2.val){
+				return false;
+			}
+			//遍历接下来所有节点，其中有一环返回false就会返回false
+			return DoseTree1HaveTree2(p1.left,p2.left)&&DoseTree1HaveTree2(p1.right,p2.right);
+		}
+		console.log(HasSubtree(n1,m1));
+	</script>
+</body>
+</html>

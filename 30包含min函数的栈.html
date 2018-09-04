@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。在该栈中调用min、push、pop的时间复杂度都是O(1);
+		var stack = [];
+		var fuzhu = [];
+		function push(n){
+			stack.push(n);
+			if(fuzhu.length==0){
+				fuzhu.push(n);
+			}else{
+				var min = fuzhu.pop();
+				fuzhu.push(min);
+				if(n<min){
+					fuzhu.push(n);
+				}
+			}
+		}
+		function pop(){
+			var n1 = stack.pop();
+			var n2 = fuzhu.pop();
+			if(n1!==n2){
+				fuzhu.push(n2);
+			}
+		}
+		function min(){
+			var min = fuzhu.pop();
+			fuzhu.push(min);
+			return min;
+		}
+		push(5)
+		push(2)
+		push(3)
+		console.log(stack);
+		pop();
+		console.log(stack);	
+		console.log(min());
+	</script>
+</body>
+</html>

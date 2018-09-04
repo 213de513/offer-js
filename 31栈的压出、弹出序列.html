@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数组均不相等。
+		function judge(push,pop){
+			if(push.length==0||pop.length||(pop.length!==push.length)){
+				return false;
+			}
+			//辅助栈
+			var stack = [];
+			var popIndex = 0;
+			//遍历输入栈
+			for(var i=0;i<push.length;++i){
+				stack.push(push[i]);
+				//每次都是比较出栈位置和辅助栈顶的值
+				var top = push[i];
+				whlie(stack.length>0&&top==pop[popIndex]){
+					stack.pop();
+					popIndex++;
+					if(stack.length>0){
+						//重新获取辅助栈顶元素
+						top = stack.pop();
+						stack.push(top);
+					}
+				}
+			}
+			//如果辅助栈为空，则证明全部出栈了
+			return stack.length==0
+		}
+	</script>
+</body>
+</html>

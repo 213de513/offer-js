@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目 定义一个链表，输入一个链表的头节点，反转并输出反转后链表的头结点。
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}		
+		var head = new ListNode(1);
+		var b2 = new ListNode(2);
+		var b3 = new ListNode(3);
+		var b4 = new ListNode(4);
+		var b5 = new ListNode(5);
+		var b6 = new ListNode(6);
+		//产生一个链表环
+		head.next = b2;
+		b2.next = b3;
+		b3.next = b4;
+		b4.next = b5;
+		b5.next = b6;
+		function reverseList(pHead){
+			if(pHead==null){
+				return null;
+			}
+			//定义翻转后的头
+			var pReverseNode = null;
+			var current = pHead;
+			var pre = null;
+			while (current!==null) {
+				//把当前的下一个节点保存下来
+				var pNext = current.next;
+				if(pNext==null){
+					//如果为空 证明pNext是表尾，也就是未来输出的表头
+					pReverseNode = current;
+				}
+				//把当前指针指向前一个节点
+				current.next = pre;
+				//当前指针指向前一个节点后，把当前设为下一个要被指的“前一个节点”
+				pre = current;
+				//切换到下一个节点
+				current = pNext;
+			}
+			console.log(pReverseNode.val);
+		}
+		reverseList(head);
+		console.log(b6);
+	</script>
+</body>
+</html>

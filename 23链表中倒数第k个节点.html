@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}		
+		var head = new ListNode('head');
+		var b1 = new ListNode('b1');
+		var b2 = new ListNode('b2');
+		var b3 = new ListNode('b3');
+		var foot = new ListNode('foot');
+		head.next = b1;
+		b1.next = b2;
+		b2.next = b3;
+		b3.next = foot;
+		//题目：输入一个链表，输出该链表中倒数第k个节点，题目从1开始计数。
+		//思路：设置两个指针，第一个指针先走k-1步，然后两个指针同时向后走，当第一个指针走到表尾，则第一个指针指向倒数第K个节点。
+		function FindKToTail(pHead,k){
+			if(pHead==null){
+				return false;
+			}
+			if(k==0){
+				return false;
+			}
+
+			var pre = head,last = head;
+			//先往前走k-1步
+			for(var i=0;i<k-1;i++){
+				if(last.next!=null){
+					last = last.next;
+				}else{
+					return false;
+				}
+				
+			}
+			//当last在表尾 打印pre即可
+			while(last.next!=null){
+				last = last.next;
+				pre = pre.next;
+			}
+			console.log(pre.val);
+
+		}
+		FindKToTail(head,1)
+
+	</script>
+</body>
+</html>

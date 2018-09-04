@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}		
+		var b1 = new ListNode(1);
+		var b2 = new ListNode(2);
+		var b3 = new ListNode(3);
+		var b4 = new ListNode(4);
+		var b5 = new ListNode(5);
+		var b6 = new ListNode(6);
+		var b7 = new ListNode(7);
+		var b8 = new ListNode(8);
+		b1.next = b3;
+		b3.next = b5;
+		b5.next = b7;
+		b2.next = b4;
+		b4.next = b6;
+		b6.next = b8;
+//题目：输入两个升序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。
+//思路：递归思想，判断大小，然后递归
+		function MergeList(pHead1,pHead2){
+			if(pHead1==null){
+				return pHead2;
+			}
+			if(pHead2==null){
+				return pHead1;
+			}
+			if(pHead1==null&&pHead2==null){
+				return null;
+			}
+			//创建一个最后结果的链表
+			var min = null;
+			if(pHead1.val<pHead2.val){
+				//如果第一个链表的值比较小，就把头赋值成这个数，然后进行递归操作，每次返回的都是最小值。
+				min = pHead1;
+				min.next = MergeList(pHead1.next,pHead2);
+			}else{
+				min = pHead2
+				min.next = MergeList(pHead1,pHead2.next);
+			}
+			return min;
+		}
+		console.log(MergeList(b1,b2));
+	</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//输入一个矩阵，按照从外向内以顺时针顺序依次打印出每一个数字。
+		function PrintMatrix(m){
+			var row = m.length;//矩阵的行数
+			var col = m[0].length//矩阵的列数
+			var res = [];//结果数组
+			if(row==0||col==0){
+				return false;
+			}
+			//定义初始坐标值
+			var top=0,left=0,right=col-1,bottom=row-1;
+			while (left<=right&&top<=bottom) {
+				//从左至右打印
+				for(var i=left;i<=right;i++){
+					res.push(m[top][i]);
+				}
+				//从上至下打印
+				for(var i=top+1;i<=bottom;i++){
+					res.push(m[i][right]);
+				}
+				//从右至左打印
+				if(top!=bottom){
+					for(var i=right-1;i>=left;i--){
+					res.push(m[bottom][i]);
+				}
+				}				
+				//从下至上
+				if(left!=right){
+					for(var i=bottom-1;i>top;--i){
+						res.push(m[i][left]);
+					}
+				}				
+				//走完这一圈 就打印下一圈
+				left++,top++,right--,bottom--;
+			}
+			return res;
+		}
+		var matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]];
+		console.log(PrintMatrix(matrix));
+	</script>
+</body>
+</html>

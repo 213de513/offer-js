@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}		
+		var head = new ListNode(1);
+		var b2 = new ListNode(2);
+		var b3 = new ListNode(3);
+		var b4 = new ListNode(4);
+		var b5 = new ListNode(5);
+		var b6 = new ListNode(6);
+		//产生一个链表环
+		head.next = b2;
+		b2.next = b3;
+		b3.next = b4;
+		b4.next = b5;
+		b5.next = b6;
+		b6.next = b3;
+		//题目：如果一个链表中包含环，如何找出环的入口节点。
+		//思路：1.首先判断输入的链表是否有环，通过两个指针，一个每次走一步，一个每次走两步，如果两个再次相遇证明有环，且相遇的点一定在环内。
+		//2.判断有环后，需要知道换的长度，通过让一个指针走环的一圈判断环的长度
+		//3.知道环长度后，采用23题的思路，找两个指针，第一个指针先走n步，两个再同时走，再次相遇的点就是入口。
+		function MeetingNode(pHead){
+			if(pHead==null){
+				return false;
+			}
+			//如果只有一个节点 没有环
+			if(pHead.next==null){
+				return false;
+			}
+			var pSlow = pHead.next;
+			var pFast = pSlow.next;
+			while(pSlow!==null&&pFast!==null){
+				if(pFast.val==pSlow.val){
+					return pFast;
+				}
+				//慢的走一步
+				pSlow = pSlow.next;
+				//快的走两步
+				pFast = pFast.next.next;
+			}
+			return null;
+		}
+		function EntryNode(pHead){
+			var meetingNode = MeetingNode(pHead);
+			if(meetingNode==null){
+				return false;
+				//证明没有环
+			}
+			//获取环中节点数目
+			var nodesNum = 1;
+			var pNode1 = meetingNode;
+			//通过再次相遇计数器走的路程判断环中个数
+			while (pNode1.next!=meetingNode) {
+				pNode1 = pNode1.next;
+				++nodesNum;
+			}
+			//使用两个指针，pre和last
+			//last先向前移动环节点的长度，两个指针再一起移动，当两个节点相遇，则当前节点为入口。
+			var pre  = pHead;
+			var last = pHead;
+			for(var i=0;i<nodesNum;i++){
+				last = last.next;
+			}
+			while(pre.val!==last.val){
+				pre = pre.next;
+				last = last.next;
+			}
+			console.log(pre.val);
+		}
+		EntryNode(head);
+	</script>
+</body>
+</html>
