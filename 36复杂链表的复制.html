@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：请实现一个函数复制一个复杂链表，复杂链表中，每个节点除了有一个指针指向下一个节点，还有一个指针指向链表中任意节点或者null；
+		class ComplexListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+				this.sibling = null;
+			}
+		}
+		//生成原始链表
+		var A = new ComplexListNode('A')
+		var B = new ComplexListNode('B')
+		var C = new ComplexListNode('C')
+		var D = new ComplexListNode('D')
+		var E = new ComplexListNode('E')
+		A.next = B;
+		B.next = C;
+		C.next = D;
+		D.next = E;
+		A.sibling = C;
+		B.sibling = E;
+		D.sibling = B;
+
+		//第一步 复制链表，并把塞到每个节点的后边
+		function CloneList(pHead){
+			if(pHead==null){
+				return false;
+			}
+			while(pHead!==null){
+				var clone = new ComplexListNode();
+				clone.val = pHead.val;
+				clone.next = pHead.next;
+				//塞到后边
+				pHead.next = clone;
+				//切换到下一个节点
+				pHead = clone.next;
+			}
+		}
+		//第二步设置复制出来的节点的sibling
+		function ConnectingSibling(pHead){
+			var node = pHead;
+			while(node!=null){
+				var clone = node.next;
+				if(node.sibling!==null){
+					clone.sibling = node.sibling.next;
+				}
+				node = clone.next;
+			}
+		}
+		//第三步 把奇数位置的节点用next链接起来就是原始链表，把偶数位置的节点链接起来就是复制链表
+		function ReconnectNode(pHead){
+			var node = pHead;
+			var cloneHead = null;
+			var cloneNode = null;
+			if(node!==null){
+				cloneHead =cloneNode = node.next;
+				//把next指向第三个节点
+				node.next = cloneNode.next;
+				//切换到第三个节点
+				node = node.next;
+			}
+			while(node!==null){
+				cloneNode.next = node.next;
+				cloneNode = cloneNode.next;
+				node.next = cloneNode.next;
+				node = node.next;
+			}
+			return cloneHead;
+		}
+		function Clone(pHead){
+			CloneList(pHead);
+			console.log(pHead);
+			ConnectingSibling(pHead);
+			ReconnectNode(pHead);
+		}
+		console.log(Clone(A));
+	</script>
+</body>
+</html>

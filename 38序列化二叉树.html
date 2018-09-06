@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：实现两个函数，分别用来序列化和反序列化二叉树
+		class Node{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Node(1);
+		var n2 = new Node(2);
+		var n3 = new Node(3);
+		var n4 = new Node(4);
+		var n5 = new Node(5);
+		var n6 = new Node(6);
+		n1.left = n2;
+		n1.right = n3;
+		n2.left = n4;
+		n3.left = n5;
+		n3.right = n6;
+
+
+		var arr = [];
+		//序列化就是前序遍历的思想，如果有空就为“#”；
+		function Serialize(pRoot){
+			if(pRoot==null){
+				arr.push('#');
+				return
+			}
+			arr.push(pRoot.val);
+			Serialize(pRoot.left);
+			Serialize(pRoot.right);
+
+		}
+		function Deserialize(arr){
+			if(arr.length==0){
+				return null;
+			}
+			var root = null;
+			var temp = arr.shift();
+			if(typeof temp=='number'){
+				root = new Node(temp);
+				root.left = Deserialize(arr);
+				root.right = Deserialize(arr);
+			}
+			return root;
+		}
+		Serialize(n1);
+		console.log(arr);
+		console.log(Deserialize(arr));
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：实现一个函数，按照之字形打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，以此类推。
+		//思路：按之字形打印二叉树需要两个栈。我们在打印某一层节点时，把下一层的子节点保存到相应的栈里，如果打印的是奇数层（第一层，第三层），则先保存左子节点在保存右子节点到第一个栈里；如果当前打印的是偶数层（第二层，第四层），则先保存右子节点再保存左子节点到第二个栈里。
+		function Print(pRoot){
+			if(pRoot==null){
+				return;
+			}
+			var current = 0;
+			var next = 1;
+			var levels = [];
+			levels[current] = [];
+			levels[next] = [];
+			levels[current].push(pRoot);
+			while (levels[0].length!=0||levels[1]!=0) {
+				var node = levels[current].pop();
+				console.log(node.val);
+				//代表打印第一层，第三层....先保存左，再保存右
+				if(current==0){
+					if(node.left!==null){
+						levels[next].push(node.left);
+					}
+					if(node.right!==null){
+						levels[next].push(node.right);
+					}
+				}else{
+					//先保存右，再保存左
+					if(node.right!==null){
+						levels[next].push(node.right);
+					}
+					if(node.left!==null){
+						levels[next].push(node.left);
+					}
+				}
+				if(levels[current].length==0){
+					console.log('\n');
+					current = 1-current;
+					next = 1 - next;
+				}
+			}
+		}
+	</script>
+</body>
+</html>

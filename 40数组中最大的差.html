@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：求数组中最大的差，且只能后一个数减前一个数。
+		var arr = [7,8,4,9,9,15,3,1,10];
+		function findMaxDiff(arr){
+			if(arr.length<=1){
+				return false;
+			}
+			var current_min = arr[0];
+			var current_max = 0;
+
+			for(var i=1;i<arr.length;i++){
+				//如果后一项减最小值比现在的最大值大，就更换最大值
+				if(arr[i]>current_min&&arr[i]-current_min>current_max){
+					current_max = arr[i]-current_min;
+				}else if(arr[i]<current_min){
+					current_min = arr[i];
+				}
+			}
+			if(current_max<=0){
+				return false;
+			}
+			return current_max;
+		}
+		console.log(findMaxDiff(arr));
+	</script>
+</body>
+</html>

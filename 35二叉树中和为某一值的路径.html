@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	class Node{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Node(10);
+		var n2 = new Node(5);
+		var n3 = new Node(12);
+		var n4 = new Node(4);
+		var n5 = new Node(7);
+		n1.left = n2;
+		n1.right=n3;
+		n2.left = n4;
+		n2.right = n5;
+		//题目：输入一颗二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶子节点所经过的节点形成一条路径。
+		//思路：使用前序遍历方式访问节点，把节点添加到路径上，并累计该节点的值。如果该节点为叶子节点，并且路径中节点值刚好等于输入的目标值，则路径符合要求，我们打印出来。如果当前节点不是叶子节点，则继续访问他的子节点。当前节点访问结束后，递归函数自动回到它的父节点。因此我们在函数推出前要在路径上删除当前节点并减去当前节点的值，以确保返回父节点路径刚好是从根节点到父节点。使用栈的数据结构。
+		function FindPath(pRoot,target){
+			if(pRoot==null){
+				return false;
+			}
+			var path = [];
+			var currentSum = 0;
+			Find(pRoot,target,path,currentSum);
+		}
+		function Find(pRoot,target,path,currentSum){
+			currentSum+=pRoot.val;
+			path.push(pRoot.val);
+			//如果是叶子节点，并且路径上节点值的和等于输入的值
+			//打印这条路经
+			var isLeaf = pRoot.left==null&&pRoot.right==null;
+			if(currentSum==target&&isLeaf){
+				console.log('有一条路径');
+				for(var i=0;i<path.length;i++){
+					console.log(path[i]);
+				}	
+			}
+			//如果不是叶子节点，则遍历他的叶子节点
+			if(pRoot.left!==null){
+				Find(pRoot.left,target,path,currentSum);
+			}
+			if(pRoot.right!==null){
+				Find(pRoot.right,target,path,currentSum)
+			}
+			//返回父节点前，从路径上删除当前节点
+			path.pop();
+			// currentSum-=pRoot.val;
+		}
+		FindPath(n1,22);
+	</script>
+</body>
+</html>

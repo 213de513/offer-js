@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	class Node{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Node(8);
+		var n2 = new Node(8);
+		var n3 = new Node(9);
+		var n4 = new Node(2);
+		var n5 = new Node(4);
+		var n6 = new Node(7);
+		var n7 = new Node(7);
+		n1.left = n2;
+		n1.right = n7;
+		n2.left = n3;
+		n2.right = n4;
+		n4.left = n5;
+		n4.right = n6;
+		//题目：从上到下打印出二叉树的每个节点，同一层节点按照从左到右打印。也就是树的广度遍历
+		//思路：设置一个辅助队列，利用队列先进先出的特性，依次把节点压进队列中。
+		//辅助队列
+		var queue = [];
+		function printNode(pRoot){
+			if(pRoot == null){
+				return null;
+			}			
+			queue.push(pRoot);
+			while(queue.length!=0){
+				var node = queue.shift();
+				console.log(node.val);
+				if(node.left!=null){
+					queue.push(node.left);
+				}
+				if(node.right!=null){
+					queue.push(node.right);
+				}
+			}
+		}
+		printNode(n1);
+	</script>
+</body>
+</html>

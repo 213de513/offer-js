@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入一个字符串，打印该字符串中字符的所有排列。例如，输入abc则打印所有abc能排列出来的所有字符串abc,acb,bac,bca,cab,cba
+		function permutation(str){
+			var result = [];
+			if(str.length<=0){
+				return [];
+			}
+			var sortTemp = '';
+			var arr = str.split('');
+			result = sortString(arr,sortTemp,[]);
+			return result;
+		}
+		function sortString(arr,temp,result){
+			//数组遍历完了，就把排列好的塞到结果数组中
+			if(arr.length==0){
+				result.push(temp)
+			}else{
+				var isRepeat = {};
+				for(var i=0;i<arr.length;i++){					
+						//取出第一个字符串
+						var tem = arr.splice(i,1)[0];
+						temp +=tem;
+						sortString(arr,temp,result);
+						//把取出来的放回去
+						arr.splice(i,0,tem);
+						//把temp还原为空字符串
+						temp = temp.slice(0,temp.length-1);					
+				}
+			}
+			return result;
+		}
+		console.log(permutation('abc'));
+	</script>
+</body>
+</html>
