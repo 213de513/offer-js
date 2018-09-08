@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：请从字符串中找出一个最长的不包含重复字符串的子字符串，计算该最长子字符串的长度。假设字符串只包含了‘a-z’的字符。
+		//动态规划，如果第i个字符之前没出现过，回归方程是f(i)=f(i-1)+1，f(i)表示以第i个字符为结尾的不包含重复字符的子字符串长度
+		//如果第i个字符之前出现过，就有两种情况，一：这一次距离上一次出现的距离d<=f(i-1),此时f(i) = d;
+		//二：如果d>f(i-1),证明重复的值不在这个子串中，则f(i) = f(i-1)+1;
+		function longestSubstring(str){
+			if(str.length==0){
+				return false;
+			}
+			if(str.length==1){
+				return 1;
+			}
+			var maxLength = 0;
+			var position = {};
+			for(var i=0;i<str.length;i++){
+				if(position[str[i]]===undefined){
+					//如果这个字符没出现过
+					position[str[i]]=i;
+					maxLength++;
+				}else{
+					//找到距离上一个出现的距离
+					var d = i- parseInt(position[str[i]]);
+					//重新记录
+					position[str[i]] = i;
+					if(d<=maxLength){
+						maxLength = d;
+					}else{
+						maxLength++
+					}
+				}
+
+			}
+			return maxLength;
+		}
+		console.log(longestSubstring(''))
+	</script>
+</body>
+</html>

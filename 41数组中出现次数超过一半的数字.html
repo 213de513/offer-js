@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：数组中有一个数字超过数组长度的一半，请找出这个数。
+		//设置一个hashmap 保存数量，如果一个数超过了数组长度的一半，就不用再循环了，这样的时间复杂度是O(n)
+		//或者进行排序，找中位数，这样的复杂度是O(nlogn)
+		function MoreThanHalfNum(arr){
+			if(arr.length==0){
+				return false;
+			}
+			if(arr.length==1){
+				return arr[0];
+			}
+			var obj = {};
+			for(var i=0;i<arr.length;i++){
+				if(!obj[arr[i]]){
+					obj[arr[i]] =1
+				}else{
+					obj[arr[i]]++
+				}
+				if(obj[arr[i]]>Math.floor(arr.length/2)){
+					return arr[i];
+				}
+			}
+			//如果一个都没有超过数组的一半  就返回null
+			return null;
+		}
+		var arr = [1,2,3,5,7,9,5,4,2];
+		console.log(MoreThanHalfNum(arr));
+	</script>
+</body>
+</html>

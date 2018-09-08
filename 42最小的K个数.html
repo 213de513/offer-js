@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入n个整数，找出其中最小的k个数。
+		//测试：输入 4、5、1、6、2、7、3、8  k=4 输出1、2、3、4
+		//1.排序，把他们进行排序之后，找到前边k个即为最小k个，复杂度是O(nlogn)
+		// function FindKMinNum(arr,k){
+		// 	if(k>arr.length){
+		// 		return false;
+		// 	}
+		// 	var sortArr = arr.sort((a,b)=>a>b);
+		// 	for(var i=0;i<k;i++){
+		// 		console.log(sortArr[i]);
+		// 	}
+		// }
+		//2.设置一个长度为k的容器，如果容器不足k就塞到容器中，如果满了k，就比较容器中最大的数，如果容器的大，就替换，如果容器的小，就舍掉这个数
+		function FindKMinNum(arr,k){
+			var container = [];
+			var max = arr[0];
+			var maxIndex = 0;
+			for(var i=0;i<arr.length;i++){
+				if(container.length<k){
+					container.push(arr[i]);
+					//保存一个最大值
+					if(arr[i]>max){
+						max = arr[i];
+						maxIndex = i;
+					}					
+				}else{
+					//如果满了，就比较最大值
+					if(arr[i]<max){
+						container.splice(maxIndex,1,arr[i]);
+						max = arr[0];
+						//更换最大值
+						for(var j=1;j<container.length;j++){
+							if(container[j]>max){
+								max = container[j];
+								maxIndex = j;
+							}
+						}
+					}else{
+						continue;
+					}
+				}
+			}
+			return container;
+		}
+		console.log(FindKMinNum([4,5,1,6,2,7,3,8],4));
+		//快排
+		// function quickSort(arr){
+		// 	if(arr.length<=1){
+		// 		return arr;
+		// 	}
+		// 	var left = [];
+		// 	var right = [];
+		// 	var mid = arr[0];
+		// 	for(var i=1;i<arr.length;i++){
+		// 		if(arr[i]>mid){
+		// 			right.push(arr[i]);
+		// 		}else{
+		// 			left.push(arr[i]);
+		// 		}
+		// 	}
+		// 	return quickSort(left).concat([mid],quickSort(right));
+		// }
+
+		// console.log(quickSort([4,5,1,6,2,7,3,8]));
+	</script>
+</body>
+</html>

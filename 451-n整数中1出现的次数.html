@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入一个整数n，求1~n这个n个整数的十进制表示1出现的次数。例如，输入12，1~12这些证书中包含1的数字有1、10、11、12，1一共出现了5次。
+		function NumberOf1Between1AndN(n){
+			var count = 0;
+			for(var i=1;i<=n;i++){
+				count+=NumOf1(i);
+			}
+			return count;
+		}
+		function NumOf1(n){
+			var num = 0;
+			while(n){
+				//判断个位是不是有1
+				if(n%10==1){
+					num++;
+				}
+				//去掉个位数
+				n = parseInt(n/10);
+			}
+			return num;
+		}
+		console.log(NumberOf1Between1AndN(12));
+	</script>
+</body>
+</html>

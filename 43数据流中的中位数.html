@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function GetMid(arr){
+			if(arr==0){
+				return false;
+			}
+			var result = arr.sort((a,b)=>{
+				return a>b;
+			})
+			if(arr.length%2==0){
+				//如果个数是偶数,中位数是中间两个数和的一半
+				return (result[arr.length/2-1]+result[arr.length/2])/2
+			}else{
+				return result[Math.floor(arr.length/2)];
+			}
+		}
+		console.log(GetMid([1,2]));
+	</script>
+</body>
+</html>

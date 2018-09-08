@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：在一个m*n的期盼的每一个都放油一个礼物，每个礼物都有一定的价值（价值大于0）。你可以从期盼的左上角开始拿礼物，并且每次向左或者向下移动一格，直到你达到棋盘的右下角。给定一个棋盘，及其礼物，请计算你最多能拿到多少礼物。
+		//思路：动态规划，采用递归的思路。
+		//以下是贪心。。
+		// function getMaxValue(martix){
+		// 	var max = martix[0][0];
+		// 	var row = martix.length;
+		// 	var col = martix[0].length;
+		// 	var top = 0;
+		// 	var left = 0;
+		// 	//假如是4*4矩阵，则row=4 col=4 top->3 left->3 就在终点了
+		// 	while(true){
+		// 		var down = 0;
+		// 		var right = 0;
+		// 		if(top+1<row){
+		// 			down = martix[top+1][left];
+		// 		}
+		// 		if(left+1<col){
+		// 			right = martix[top][left+1];
+		// 		}
+		// 		if(down>=right){
+		// 			max +=down;
+		// 			top++
+		// 		}else{
+		// 			max +=right;
+		// 			left++;
+		// 		}
+		// 		if(left==col-1&&top==row-1){
+		// 			break;
+		// 		}			
+		// 	}
+		// 	return max;
+		// }
+		//动态规划如下 回归方程是：f(i,j) = max(f(i-1,j),f(i,j-1))+g(i,j),其中g(i,j)是当前礼物的值
+		function getMaxValue(martix){
+			var row = martix.length;
+			var col = martix[0].length;
+			if(row==0||col==0){
+				return false;
+			}
+			//特殊处理第一行，第一列,这个值由上边加左边实现。
+			for(var i=1;i<col;i++){
+				martix[0][i] = martix[0][i]+martix[0][i-1];
+				martix[i][0] = martix[i][0]+martix[i-1][0];
+			}
+			for(var i=1;i<row;i++){
+				for(var j=1;j<col;j++){
+					martix[i][j] = Math.max(martix[i-1][j],martix[i][j-1])+martix[i][j];
+				}
+			}
+			return martix[row-1][col-1];
+		}
+		var m = [[1,10,3,8],[12,2,9,6],[5,7,4,11],[3,7,16,5]];
+		console.log(getMaxValue(m));
+	</script>
+</body>
+</html>

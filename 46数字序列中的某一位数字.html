@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function digitAtIndex(index){
+			if(index<0){
+				return -1
+			}
+			var digit = 1;
+			while(true){
+				//判断这个index应该在几位数序列中。
+				var numbers = countOfIntegers(digit);
+				if(index<numbers*digit){
+					//查找位置
+					return Index(index,digit);
+				}
+				index -=numbers*digit;
+				digit++;
+			}
+			return -1;
+		}
+		function countOfIntegers(digit){
+			if(digit==1){
+				return 10;
+			}
+			var count = Math.pow(10,digit-1);
+			return 9*count;
+		}
+		function Index(index,digit){
+			//找出这个数字
+			var number = beginNumber(digit)+parseInt(index/digit);
+			//从右数第几位（2）
+			var indexFromRight = digit-index%digit;
+			for(var i=1;i<indexFromRight;i++){
+				//把第2位置成个位
+				number = parseInt(number/10);
+
+			}
+			//输出这个个位
+			return number%10
+		}
+		//第m位第一个数字 第一个两位数是10，第一个三位数是100，因此第一个digit位数可以如下表示。
+		function beginNumber(digit){
+			if(digit==1){
+				return 0
+			}
+			return Math.pow(10,digit-1);
+		}
+		console.log(digitAtIndex(19));
+	</script>
+</body>
+</html>
