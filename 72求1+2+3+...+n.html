@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：求1+2+...+n,要求不能使用乘除法，for，while，if，else，switch，case等关键字及条件判断语句
+		function Sum_Solution(n)
+		{
+		    // write code here
+		    var sum=n;
+		    //短路运算，n!==0，如果等于0，则不会进行后续的运算
+		    var a=(n!=0)&&((sum+=Sum_Solution(n-1))>0)
+		    return sum
+		}
+	</script>
+</body>
+</html>

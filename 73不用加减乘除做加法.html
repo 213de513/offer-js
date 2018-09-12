@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：写一个函数，求两个整数的和，要求在函数体内不得使用+，-，*，/四则运算
+		//采用二进制的位运算：1.各位相加，不进位。2.计算进位。3结果相加
+		//思路：比如5（101）+2（011）计算，先不进位，直接相加（101+011=001），然后再把进位（001+100=101）加上，
+// 不考虑进位直接相加可以看出，1+0=1，1+1=0，0+0=0，这是异或操作（^），对加 0 、0 加 1 、1 加 0 而言， 都不会产生进位，只有 1 加 1 时，会向前产生一个进位。此时我们可以想象成是两个数先做位与运算，然后再向左移动一位
+		function Add(num1,num2){
+			var sum,carry;
+		    do{
+		      sum=num1 ^ num2;
+		      carry=(num1&num2)<<1;
+		      num1=sum;
+		      num2=carry;
+		    }while(num2!=0)
+		    return sum;
+				}
+//不用新的变量，交换a、b两个数
+/*
+	a = a+b;   [a,b] = [b,a] 
+	b = a-b;
+	a = a-b;
+	
+*/
+	</script>
+</body>
+</html>

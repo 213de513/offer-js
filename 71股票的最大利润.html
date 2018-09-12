@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：假设把某股票的价格按照时间先后排序存储在数组中，请问买卖该股票一次可能获得的最大利润是多少？
+		function MaxDiff(arr){
+			if(arr.length<2){
+				return -1;
+			}
+			var max = 0;
+			var min = arr[0];
+			for(var i=1;i<arr.length;i++){
+				if(arr[i]>min&&arr[i]-min>max){
+					max = arr[i]-min
+				}else if(arr[i]<min){
+					min = arr[i]
+				}
+			}
+			if(max<0){
+				return -1;
+			}
+			return max;
+		}
+		console.log(MaxDiff([1,2]));
+	</script>
+</body>
+</html>

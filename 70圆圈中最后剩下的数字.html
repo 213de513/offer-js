@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：0,1,...,n-1 这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。
+		//思路1：创建数组，每次到m的位置，就把这个数从数组中删去，然后重新找
+		//
+		function lastOne(n,m){
+			if(n<1||m<1){
+				return -1;
+			}
+			var arr = [];
+			for(var i=0;i<n;i++){
+				arr.push(i);
+			}
+			var index = 0;
+			while (arr.length>1) {
+				for(var i=1;i<m;i++){
+					//每次循环 index都要加1 ，并且模余当前的length
+					index = (index+1)%arr.length;
+				}
+				arr.splice(index,1);
+			}
+			return arr[0];
+		}
+		console.log(lastOne(5,3));
+	</script>
+</body>
+</html>
