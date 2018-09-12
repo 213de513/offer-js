@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：从扑克牌中随机抽5张牌，判断是不是一个顺子，即这5张牌是不是连续的，2~10为数字本身，A为1，J为11，Q为12，K为13，而大小王可以看成任意数。
+		//可以把大小王看成0，可以区分扑克牌。做三件事，首先把数组排序，其次统计数组中0的个数，最后统计排序之后数组中相邻数字间空缺的总数，如果空缺数小于或等于0的个数，那么数组就是连续的
+		//如果有对子，那么则不可能连续
+		function solution(arr){
+			var obj = {};
+			var flag = false;
+			if(!flag){
+				//判断有没有对子
+					for(var i=0;i<arr.length;i++){
+					if(!obj[arr[i]]){
+						obj[arr[i]]=1;
+					}else{
+						 flag = true;
+						 break;
+					}
+				}
+			}
+			if(!flag){
+				//重排序
+				var res = arr.sort((a,b)=>{
+					return a-b;
+				})
+				//判断0的个数
+				var count = 0;
+				for(var i=0;i<arr.length;i++){
+					if(arr[i]!=0){
+						break;
+					}
+					count++;
+				}
+				//把数组非0的部分切割出来
+				var judgeArr = res.slice(count);
+				for(var i=0;i<judgeArr.length;i++){
+					if(judgeArr[i]=='J') judgeArr[i] = 11;
+					if(judgeArr[i]=='Q') judgeArr[i] = 12;
+					if(judgeArr[i]=='K') judgeArr[i] = 13;
+				}
+				//判断缺失的个数
+				var lostNum = 0;
+				for(var i=0;i<judgeArr.length-1;i++){
+					if(judgeArr[i+1]-judgeArr[i]>1){
+						//如果相差比1大，就看看之间差了多少，记录下来。
+						lostNum += judgeArr[i+1]-judgeArr[i]-1;
+					}
+				}
+				//比较0的个数和缺失的个数
+				if(count>=lostNum){
+					return true;
+				}else{
+					return false;
+				}
+			}else{
+				return false;
+			}
+			
+		}
+		console.log(solution([0,1,3,4,5]))
+	</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：给定一颗二叉搜索树，请找出其中第k打的节点。
+		class Tree{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Tree(5);
+		var n2 = new Tree(3);
+		var n3 = new Tree(7);
+		var n4 = new Tree(2);
+		var n5 = new Tree(4);
+		var n6 = new Tree(6);
+		var n7 = new Tree(8);
+		n1.left = n2;
+		n1.right = n3;
+		n2.left = n4;
+		n2.right = n5;
+		n3.left = n6;
+		n3.right = n7;
+		var res = [];
+		function FindKthNum(pRoot,k){
+			if(pRoot==null){
+				return null;
+			}
+			if(pRoot.left!==null){
+				FindKthNum(pRoot.left)
+			}
+			res.push(pRoot.val);
+			if(pRoot.right!==null){
+				FindKthNum(pRoot.right);
+			}
+			return res[k-1];
+		}
+		console.log(FindKthNum(n1,3));
+	</script>
+</body>
+</html>

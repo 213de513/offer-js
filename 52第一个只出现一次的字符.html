@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：字符串中第一个只出现一次的字符
+		function FirstNotRepeating(str){
+			var result = [];
+			var obj = {}
+			for(var i=0;i<str.length;i++){
+				if(!obj[str[i]]){
+					obj[str[i]]=1;
+					result.push(str[i]);
+				}else{
+					if(result.indexOf(str[i])>=0){
+						//如果以及出现，且数组中有这个数，就把这个数从数组中删除。
+						result.splice(result.indexOf(str[i]),1);
+					}
+				}
+			}
+			return result[0];
+		}
+		console.log(FirstNotRepeating('abaccdeff'))
+	</script>
+</body>
+</html>

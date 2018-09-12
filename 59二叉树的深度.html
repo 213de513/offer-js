@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：二叉树深度
+		class Tree{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Tree(5);
+		var n2 = new Tree(3);
+		var n3 = new Tree(7);
+		var n4 = new Tree(2);
+		var n5 = new Tree(4);
+		var n6 = new Tree(6);
+		var n7 = new Tree(8);
+		n1.left = n2;
+		n1.right = n3;
+		n2.left = n4;
+		n2.right = n5;
+		n5.right = n6;
+		n3.right = n7;
+		var maxDeep = 0;
+		var nowDeep = 0;
+		function GetTreeDeep(pRoot,now){
+			if(pRoot==null){
+				return 0;
+			}
+			now++;
+			if(now>maxDeep){
+				maxDeep = now
+			}
+			if(pRoot.left!==null){
+				GetTreeDeep(pRoot.left,now);
+			}
+			if(pRoot.right!==null){
+				GetTreeDeep(pRoot.right,now);
+			}
+
+		}
+		GetTreeDeep(n1,nowDeep);
+		console.log(maxDeep);
+	</script>
+</body>
+</html>

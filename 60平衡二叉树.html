@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入一颗二叉树的哥本节点，判断该树是不是平衡二叉树。如果二叉树中任意节点的左右子树的深度相差不超过1，那么他就是一颗平衡二叉树。
+		//思路：遍历求每颗子树的深度，然后比较，只要有一颗相差大于1，就不是平衡二叉树
+		class Tree{
+			constructor(val){
+				this.val = val;
+				this.left = null;
+				this.right = null;
+			}
+		}
+		var n1 = new Tree(1);
+		var n2 = new Tree(2);
+		var n3 = new Tree(3);
+		var n4 = new Tree(4);
+		var n5 = new Tree(5);
+		var n6 = new Tree(7);
+		var n7 = new Tree(6);
+		n1.left = n2;
+		n1.right = n3;
+		n2.left = n4;
+		n2.right = n5;
+		n5.left = n6;
+		n3.right = n7;
+	function solution(pRoot)
+	{
+	    // write code here
+	    if(pRoot==null) return true;
+	    var left=TreeDepth(pRoot.left);
+	    var right=TreeDepth(pRoot.right);
+	    if((left-right)>1||(left-right)<-1){
+	        return false;
+	    }
+	    return solution(pRoot.left)&&solution(pRoot.right)    
+	}
+
+	function TreeDepth(root){
+	    if(root==null) return 0;
+	    var left=TreeDepth(root.left);
+	    var right=TreeDepth(root.right);
+	    return (left>right)?left+1:right+1;
+	}
+		console.log(solution(n1));
+	</script>
+</body>
+</html>

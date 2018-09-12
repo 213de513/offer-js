@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//字符串的坐旋转操作是把字符串前面的若干个字符转移到字符串的尾部。
+		function LeftRotateStr(str,n){
+			if(str==''){
+				return false;
+			}
+			if(n==0){
+				return str;
+			}
+			if(n>=str.length){
+				return str;
+			}
+			var arr1 = str.slice(0,n);
+			var str2 = str.slice(n);
+			return str2+arr1;
+		}
+		console.log(LeftRotateStr('abcdefg',1));
+	</script>
+</body>
+</html>

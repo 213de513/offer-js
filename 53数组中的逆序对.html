@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：数组中的两个数组，如果前面一个数字大于后面的数组，则这两个组成一个逆序对
+		function InversePairs(arr){
+			for(var i=0;i<arr.length;i++){
+				var current = arr[i];
+				for(var j=i+1;j<arr.length;j++){
+					if(current>arr[j]){
+						console.log(current,arr[j])
+					}
+				}
+			}
+		}
+		InversePairs([7,5,6,4]);
+	</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入两个链表，找出他们的第一个公共节点
+		class ListNode{
+			constructor(val){
+				this.val = val;
+				this.next = null;
+			}
+		}
+		var n1 = new ListNode(1);
+		var n2 = new ListNode(2);
+		var n3 = new ListNode(3);
+		var n4 = new ListNode(4);
+		var n5 = new ListNode(5);
+		var n6 = new ListNode(6);
+		var n7 = new ListNode(7);
+		n1.next = n2;
+		n2.next = n3;
+		n3.next = n6;
+		n6.next = n7;
+		n4.next = n5;
+		n5.next = n6;
+		//蛮力法，遍历第一个链表的每一个节点的同时，遍历所有第二个链表，找相同的节点，复杂度O(mn)
+		// function getFirstPublicNode(pHead1,pHead2){
+		// 	var h1 = pHead1;
+		// 	var h2 = pHead2;
+		// 	var result = null;
+		// 	while(h1!==null){
+		// 		while(h2!==null){
+		// 			if(h2.val==h1.val){
+		// 				result = h1;
+		// 				break;
+		// 			}
+		// 			h2 = h2.next;
+		// 		}
+		// 		if(result){
+		// 			break;
+		// 		}else{
+		// 			h1= h1.next;
+		// 			h2 = pHead2;
+		// 		}
+				
+		// 	}
+		// 	return result.val;
+		// }
+		//第一次遍历，先判断长的有多长，短的有多短，先让长的走出若干步，然后在一起走，当碰到到第一个相同的就是答案
+		function getFirstPublicNode(pHead1,pHead2){
+			if(pHead2==null||pHead1==null){
+				return false;
+			}
+			var l1 = 0;
+			var l2 = 0;
+			var h1 = pHead1;
+			var h2 = pHead2;
+			while(h1!==null){
+				l1++;
+				h1 = h1.next;
+			}
+			while(h2!==null){
+				l2++;
+				h2 = h2.next;
+			}
+			if(l1>l2){
+				for(var i=0;i<l1-l2;i++){
+					pHead1 = pHead1.next;
+				}
+			}else{
+				for(var i=0;i<l2-l1;i++){
+					pHead2 = pHead2.next;
+				}
+			}
+			while(pHead1.val!=pHead2.val){
+				pHead1 = pHead1.next;
+				pHead2 = pHead2.next;
+				if(pHead1==null||pHead2==null){
+					return null;
+				}
+			}
+			return pHead1.val
+		}
+		console.log(getFirstPublicNode(n1,n4));
+	</script>
+</body>
+</html>

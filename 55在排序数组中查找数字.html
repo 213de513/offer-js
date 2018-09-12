@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：在排序数组中查找数字出现的次数
+		//思路1：普通遍历查找
+		// function searchK(arr,target){
+		// 	var count = 0;
+		// 	var flag = false;
+		// 	for(var i=0;i<arr.length;i++){
+		// 		if(arr[i]==target){
+		// 			count++;
+		// 			flag = true;
+		// 		}
+		// 		//证明他是最后一个了
+		// 			if(flag){
+		// 				if(arr[i+1]!==target){
+		// 				break;
+		// 			}
+		// 		}
+				
+		// 	}
+		// 	return count;
+		// }
+		//思路2：二分查找，先查找第一位，再查找最后一位
+		function searchFirst(arr,target){
+			var l = 0;
+			var h = arr.length-1;
+			while(l<=h){
+				var mid = Math.floor((l+h)/2);
+				if(arr[mid]==target){
+					//相等有两种情况，如果mid左边还是这个目标值，就查找左边。如果不是那么他就是第一个。
+					if(arr[mid-1]==target){
+						h = mid-1
+					}else{
+						return mid;
+					}
+				}
+				//查找右边
+				else if(arr[mid]<target){
+					l = mid+1;
+				}else{
+					//查找左边
+					h = mid-1;
+				}
+			}
+			return false;
+		}
+		function searchLast(arr,target){
+			var l = 0;
+			var h = arr.length-1;
+			while(l<=h){
+				var mid = Math.floor((l+h)/2);
+				if(arr[mid]==target){
+					//相等有两种情况，如果mid左边还是这个目标值，就查找右边。如果不是那么他就是最后一个。
+					if(arr[mid+1]==target){
+						l = mid+1
+					}else{
+						return mid;
+					}
+				}
+				//查找右边
+				else if(arr[mid]<target){
+					l = mid+1;
+				}else{
+					//查找左边
+					h = mid-1;
+				}
+			}
+			return false;
+		}
+		function searchK(arr,target){
+			if(arr.length==0){
+				return false;
+			}
+			if(searchLast(arr,target)===false){
+				return false;
+			}
+			return searchLast(arr,target)-searchFirst(arr,target)+1;
+		}
+		console.log(searchK([1,2,3,3,3,3,4,5],1)); 
+	</script>
+</body>
+</html>

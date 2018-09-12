@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：和为S的两个数字
+		//思路：找两个指针，一个指头，一个指尾，如果这个数的和比目标值小，左边就向前一个，如果大了，右边就向后一个，如果两个指针重合则没有。
+		function SumIsS(arr,target){
+			var front = 0;
+			var last = arr.length-1;
+			while(front<last){
+				if(arr[front]+arr[last]==target){
+					console.log(arr[front]);
+					console.log(arr[last]);
+					return;
+				}else if((arr[front]+arr[last])<target){
+					front++;
+				}else{
+					last--;
+				}
+			}
+			return false;
+		}
+	SumIsS([1,2,4,7,11,15],15);
+	</script>
+</body>
+</html>

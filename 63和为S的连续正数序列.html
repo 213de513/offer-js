@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：输入一个正数S，打印所有和为S的连续正数序列（至少含有两个数）。
+		function FindContinuousSequence(target){
+			if(target<3){
+				return;
+			}
+			var start = 1;
+			var end = 2;
+			var mid = Math.floor((1+target)/2);
+			var current = start+end;
+			while (start<mid) {
+				if(current==target){
+					Print(start,end);
+				}
+				if(current<=target){
+					end++;
+					current+=end;
+				}
+				if(current>target){
+					current-=start;
+					start++;
+				}
+			}
+		}
+		function Print(start,end){
+				console.log('有一个序列为:')
+			for(var i=start;i<=end;i++){
+				console.log(i);
+			}
+		}
+		FindContinuousSequence(4);
+	</script>
+</body>
+</html>

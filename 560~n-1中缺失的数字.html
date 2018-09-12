@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：0~n-1中缺失的数字
+		//思路1：判断下一个和本次的是不是相差1 如果不是相差1 就代表中间少了一个数字，就重新
+		// function searchLostNum(arr){
+		// 	if(arr[0]!=0){
+		// 		return 0;
+		// 	}
+		// 	for(var i=0;i<arr.length;i++){
+		// 		if(arr[i+1]-arr[i]!==1){
+		// 			return (arr[i+1]+arr[i])/2;
+		// 		}
+		// 	}
+		// }
+
+		//思路2：采用二分查找，找下标和当前值不相等的第一个数
+		function searchLostNum(arr){
+			var l = 0;
+			var h = arr.length-1;
+			while(l<=h){
+				var mid = Math.floor((l+h)/2);
+				if(arr[mid]!==mid){
+					//如果是头，或者他前边坐标和值相等。
+					if(arr[mid-1]==mid-1||mid==0){
+						return mid
+					}else{
+						//查找左边
+						h = mid-1
+					}
+				}else{
+					l = mid+1;
+				}
+			}
+			return false;
+		}
+		console.log(searchLostNum([0,1,2,3,4,5,6,7,8,9,11]));
+	</script>
+</body>
+</html>

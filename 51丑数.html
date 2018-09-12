@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		//题目：我们把只包含2、3、5的数乘坐丑数。求按从小到大的顺序的第1500个丑数。
+		//思路：判断这个数是不是丑数，然后index++（效率低）
+
+		// function isUgly(n){
+		// 	while (n%2==0) {
+		// 		n /= 2;
+		// 	}
+		// 	while(n%3==0){
+		// 		n/=3;
+		// 	}
+		// 	while(n%5==0){
+		// 		n/=5;
+		// 	}
+		// 	return n==1?true:false;
+		// }
+
+		// function getNthUgly(n){
+		// 	var index = 0;
+		// 	var result;
+		// 	for(var i=1;;i++){
+		// 		if(isUgly(i)){
+		// 			index++;
+		// 		}
+		// 		if(index==n){
+		// 			result = i;
+		// 			break;
+		// 		}
+		// 	}
+		// 	return result;
+		// }
+
+		//不判断非丑数，下一个丑数总是有数组中某个丑数*2，*3，*5得到
+		function getNthUgly(n){
+			if(n==0){
+				return 
+			}
+			var uglys = [1];
+			var factor2 = 0,factor3 = 0,factor5 =0
+			for(var i=1;i<n;i++){
+				//只生成丑数数组
+				uglys[i] = Math.min(uglys[factor2]*2,uglys[factor3]*3,uglys[factor5]*5);
+				if(uglys[i]==uglys[factor2]*2) factor2++;
+				if(uglys[i]==uglys[factor3]*3) factor3++;
+				if(uglys[i]==uglys[factor5]*5) factor5++;
+			}
+			//从0开始的
+			return uglys[n-1];
+		}
+		console.log(getNthUgly(1500));
+	</script>
+</body>
+</html>
